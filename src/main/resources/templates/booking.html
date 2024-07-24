@@ -1,0 +1,355 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Book Seat</title>-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+<!--    <style>-->
+<!--        body {-->
+<!--            background-color: #f2f2f2;-->
+<!--            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            max-width: 800px;-->
+<!--            margin: 20px auto;-->
+<!--            background-color: #fff;-->
+<!--            padding: 30px;-->
+<!--            border-radius: 10px;-->
+<!--            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        h1 {-->
+<!--            text-align: center;-->
+<!--            color: #007bff;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        form {-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+
+<!--        .form-group {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        label {-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        input[type="text"],-->
+<!--        input[type="number"] {-->
+<!--            width: 100%;-->
+<!--            padding: 12px;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 4px;-->
+<!--            font-size: 16px;-->
+<!--            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;-->
+<!--        }-->
+
+<!--        input[type="text"]:focus,-->
+<!--        input[type="number"]:focus {-->
+<!--            border-color: #007bff;-->
+<!--            outline: 0;-->
+<!--            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);-->
+<!--        }-->
+
+<!--        input[type="submit"] {-->
+<!--            background-color: #007bff;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 12px 20px;-->
+<!--            text-align: center;-->
+<!--            text-decoration: none;-->
+<!--            display: inline-block;-->
+<!--            font-size: 16px;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        input[type="submit"]:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
+<!--        #sample{-->
+<!--         background-color: #0056b3;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            text-align: center;-->
+<!--            padding: 8px 15px;-->
+<!--            text-decoration: none;-->
+<!--            display: inline-block;-->
+<!--            font-size: 16px;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        .error-message {-->
+<!--            color: red;-->
+<!--            font-size: 14px;-->
+<!--            margin-top: 5px;-->
+<!--        }-->
+
+<!--        .go-back-btn {-->
+<!--            background-color: #0056b3;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 10px;-->
+<!--            margin-bottom:50px;-->
+<!--            text-align: center;-->
+<!--            text-decoration: none;-->
+<!--            display: inline-block;-->
+<!--            font-size: 16px;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+
+<!--        #sample :hover {-->
+<!--            background-color: #00408f;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+
+<!--<body>-->
+
+<!--<div class="container">-->
+<!--    <h1>Book Seat</h1>-->
+
+<!--    <form role="form" method="post" th:action="@{/passenger/booking/save}" th:object="${bookingForm}">-->
+<!--        <div class="form-group row">-->
+<!--            <label for="passengerId" class="col-sm-4 col-form-label">Passenger ID:</label>-->
+<!--            <div class="col-sm-8">-->
+<!--                <input type="text" id="passengerId" th:field="*{passengerId}" class="form-control" readonly>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group row">-->
+<!--            <label for="passengerName" class="col-sm-4 col-form-label">Passenger Name:</label>-->
+<!--            <div class="col-sm-8">-->
+<!--                <input type="text" id="passengerName" th:field="*{passengerName}" class="form-control" readonly>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group row">-->
+<!--            <label for="busId" class="col-sm-4 col-form-label">Bus ID:</label>-->
+<!--            <div class="col-sm-8">-->
+<!--                <input type="text" id="busId" th:field="*{busId}" class="form-control" readonly>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group row">-->
+<!--            <label for="busName" class="col-sm-4 col-form-label">Bus Name:</label>-->
+<!--            <div class="col-sm-8">-->
+<!--                <input type="text" id="busName" th:field="*{busName}" class="form-control" readonly>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group row">-->
+<!--            <label for="seatQty" class="col-sm-4 col-form-label">Seat Qty:</label>-->
+<!--            <div class="col-sm-8">-->
+<!--                <input id="seatQty" type="number" th:field="*{seatQty}" class="form-control" oninput="update()">-->
+<!--                <small class="form-text text-muted">Enter number of seats</small>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group row">-->
+<!--            <label for="price" class="col-sm-4 col-form-label">Price:</label>-->
+<!--            <div class="col-sm-8">-->
+<!--                <input id="price" type="number" th:field="*{price}" class="form-control" readonly>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group row">-->
+<!--            <label for="amount" class="col-sm-4 col-form-label">Amount:</label>-->
+<!--            <div class="col-sm-8">-->
+<!--                <input id="amount" type="number" th:field="*{amount}" class="form-control" readonly>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group text-center">-->
+<!--            <button class="btn btn-primary" id="sample" onclick="history.go(-1)">Back</button>-->
+<!--            <input type="go-back-btn" class="btn btn-primary" value="Book">-->
+
+<!--        </div>-->
+
+
+<!--    </form>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    function update() {-->
+<!--        var qty = parseInt(document.getElementById("seatQty").value);-->
+<!--        var price = parseInt(document.getElementById("price").value);-->
+
+<!--        if (qty > 0) {-->
+<!--            document.getElementById("amount").value = qty * price;-->
+<!--        } else {-->
+<!--            document.getElementById("amount").value = "";-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Book Seat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: radial-gradient(circle, rgba(144,223,202,1) 0%, rgba(17,116,233,1) 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        input[type="submit"],
+        .btn-back {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover,
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
+
+        .form-text {
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Book Your Seat</h1>
+
+    <form role="form" method="post" th:action="@{/passenger/booking/save}" th:object="${bookingForm}" onsubmit="return validateForm()">
+        <div class="mb-3">
+            <label for="passengerId" class="form-label">Passenger ID:</label>
+            <input type="text" id="passengerId" th:field="*{passengerId}" class="form-control" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="passengerName" class="form-label">Passenger Name:</label>
+            <input type="text" id="passengerName" th:field="*{passengerName}" class="form-control" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="busId" class="form-label">Bus ID:</label>
+            <input type="text" id="busId" th:field="*{busId}" class="form-control" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="busName" class="form-label">Bus Name:</label>
+            <input type="text" id="busName" th:field="*{busName}" class="form-control" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="seatQty" class="form-label">Seat Quantity:</label>
+            <input id="seatQty" type="number" th:field="*{seatQty}" class="form-control" oninput="update()" placeholder="Enter number of seats">
+            <div class="form-text">Enter the number of seats.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="price" class="form-label">Price per Seat:</label>
+            <input id="price" type="number" th:field="*{price}" class="form-control" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="amount" class="form-label">Total Amount:</label>
+            <input id="amount" type="number" th:field="*{amount}" class="form-control" readonly>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn-back" onclick="history.go(-1)">Back</button>
+            <input type="submit" value="Book" class="btn-back">
+        </div>
+    </form>
+</div>
+
+<script>
+    function update() {
+        var qty = parseInt(document.getElementById("seatQty").value);
+        var price = parseInt(document.getElementById("price").value);
+
+        if (qty > 0 && price) {
+            document.getElementById("amount").value = qty * price;
+        } else {
+            document.getElementById("amount").value = "";
+        }
+    }
+
+    function validateForm() {
+        var qty = parseInt(document.getElementById("seatQty").value);
+        var available = parseInt(document.getElementById("available").innerText);
+        if (qty <= 0 || qty > available) {
+            alert("Seats cannot be less than 1 or more than the available seats.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
